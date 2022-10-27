@@ -56,15 +56,36 @@ def file_to_graph(file_name):
   return g
 
 
-g = Graph()
-g.addEdge(0, 1)
-g.addEdge(0, 2)
-g.addEdge(1, 2)
-g.addEdge(2, 0)
-g.addEdge(2, 3)
-g.addEdge(3, 3)
+# g = Graph()
+# g.addEdge(0, 1)
+# g.addEdge(0, 2)
+# g.addEdge(1, 2)
+# g.addEdge(2, 0)
+# g.addEdge(2, 3)
+# g.addEdge(3, 3)
  
-print ("Following is Breadth First Traversal"
-                  " (starting from vertex 2)")
-g.BFS(2)
- 
+# print ("Following is Breadth First Traversal"
+#                   " (starting from vertex 2)")
+# g.BFS(2)
+
+
+def bfs(graph, start, end):
+    # maintain a queue of paths
+    queue = []
+    # push the first path into the queue
+    queue.append([start])
+    while queue:
+        # get the first path from the queue
+        path = queue.pop(0)
+        # get the last node from the path
+        node = path[-1]
+        # path found
+        if node == end:
+            return path
+        # enumerate all adjacent nodes, construct a 
+        # new path and push it into the queue
+        for adjacent in graph.get(node, []):
+            new_path = list(path)
+            new_path.append(adjacent)
+            queue.append(new_path)
+

@@ -1,4 +1,5 @@
 from collections import defaultdict
+
 class Graph:
     def __init__(self):
         self.graph = defaultdict(list)
@@ -7,8 +8,9 @@ class Graph:
         self.graph[u].append(v)
  
     def BFS(self, s, e):
-        visited = []
- 
+        visited = [] #store visited item
+        path = []
+
         
         queue = [] # FIFO queue for next vertice
  
@@ -24,10 +26,7 @@ class Graph:
             if s == e:
               break
  
-            # Get all adjacent vertices of the
-            # dequeued vertex s. If a adjacent
-            # has not been visited, then mark it
-            # visited and enqueue it
+            # check each indicie and see if it has been visited and add to queue
             for i in self.graph[s]:
                 if i not in visited:
                     queue.append(i)
@@ -35,18 +34,51 @@ class Graph:
                  
 
 def file_to_graph(file_name):
-  g = Graph()
+  g = {
+    
+  }
   f = open(file_name, "r")
   for x in f:
-    y=1
+    y=1 # starting point so that my code doesn't read the key pair twice
     split_line = x.split(",")
+    # print(split_line)
     key = split_line[0]
+    g[key] = []
     for y in range(1, len(split_line)):
-      print(split_line[y])
-      g.addEdge(key, split_line[y])
+      val = split_line[y]
+      g[key].append(val.strip("\n"))
+      # print("Maybe")
+      # g[key] += key[y]
+      # print(split_line[y])
+    
+      # g.addEdge(key, split_line[y])
       y+=1
+  print(g)
 
   return g
+
+
+
+def bfs(graph, start, end):
+  # maintain a queue of paths
+  queue = []
+  # push the first path into the queue
+  queue.append(start)
+  while queue:
+      # get the first path from the queue
+      path = queue.pop(0)
+      # get the last node from the path
+      graph[key] 
+      node = path[-1]
+      # path found
+      if node == end:
+          return path
+      # enumerate all adjacent nodes, construct a 
+      # new path and push it into the queue
+      for adjacent in graph.get(node, []):
+          new_path = list(path)
+          new_path.append(adjacent)
+          queue.append(new_path)
 
 def main():
   # print("Hello world!")
@@ -54,8 +86,9 @@ def main():
   graphed = file_to_graph(file_name)
   start = input("Where would you like to start? ")
   end = input("Where would you like to stop? ")
-  print("Your path is ")
-  graphed.BFS(start,end)
+  print("Your path is: ")
+  bfs(graphed,start,end)
+  # graphed.BFS(start,end)
   
   
   
