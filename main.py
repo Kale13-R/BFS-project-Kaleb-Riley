@@ -1,42 +1,5 @@
-from collections import defaultdict
-
-class Graph:
-    def __init__(self):
-        self.graph = defaultdict(list)
-
-    def addEdge(self,u,v):
-        self.graph[u].append(v)
- 
-    def BFS(self, s, e):
-        visited = [] #store visited item
-        path = []
-
-        
-        queue = [] # FIFO queue for next vertice
- 
-        queue.append(s)
-        visited.append(s)
- 
-        while queue:
- 
-            # Dequeue a vertex from
-            # queue and print it
-            s = queue.pop(0)
-            print (s, end = " ")
-            if s == e:
-              break
- 
-            # check each indicie and see if it has been visited and add to queue
-            for i in self.graph[s]:
-                if i not in visited:
-                    queue.append(i)
-                    visited.append(i)
-                 
-
 def file_to_graph(file_name):
-  g = {
-    
-  }
+  g = {}
   f = open(file_name, "r")
   for x in f:
     y=1 # starting point so that my code doesn't read the key pair twice
@@ -59,30 +22,60 @@ def file_to_graph(file_name):
 
 
 
-def bfs(graph, start, end):
-  # maintain a queue of paths
-  queue = []
-  # push the first path into the queue
-  queue.append(start)
-  while queue:
+# def bfs(graph, start, end):
+#   q = []
+#   visited = [start]
+
+#   q.append(start)
+
+#   while q:
     
-    # get the first path from the queue
-    path = queue.pop(0)
-    # get the last node from the path
-    adj = graph[path]
-    print(adj)
-    node = adj[-1]
-    print(node)
-    # node = path[-1]
-    # path found
-    if node == end:
-        return path
-    # enumerate all adjacent nodes, construct a 
-    # new path and push it into the queue
-    for adjacent in graph.get(node, []):
-        new_path = list(path)
-        new_path.append(adjacent)
-        queue.append(new_path)
+#     # I need this to look thorugh the starting key's value list and check if it contains the end. if it contains the end return the path. if not then check the value list's adjacent vals and see if it is in there until we have visited all nodes
+  
+#   # maintain a queue of paths
+  
+#   queue = []
+#   # push the first path into the queue
+#   queue.append(start)
+#   while queue:
+    
+#     # get the first path from the queue
+#     path = queue.pop(0)
+#     # get the last node from the path
+#     adj = graph[path]
+#     # queue.append(adj)
+#     print(adj)
+#     node = adj[-1]
+#     print(node)
+#     # node = path[-1]
+#     # path found
+#     if node == end:
+#         return path
+#     # enumerate all adjacent nodes, construct a 
+#     # new path and push it into the queue
+#     for adjacent in graph.get(node, []):
+#         new_path = list(path)
+#         new_path.append(adjacent)
+#         queue.append(new_path)
+def bfs(graph, start, end):
+    # maintain a queue of paths
+    queue = []
+    # push the first path into the queue
+    queue.append([start])
+    while queue:
+        # get the first path from the queue
+        path = queue.pop(0)
+        # get the last node from the path
+        node = path[-1]
+        # path found
+        if node == end:
+            return path
+        # enumerate all adjacent nodes, construct a 
+        # new path and push it into the queue
+        for adjacent in graph.get(node, []):
+            new_path = list(path)
+            new_path.append(adjacent)
+            queue.append(new_path)
 
 def main():
   # print("Hello world!")
@@ -91,7 +84,7 @@ def main():
   start = input("Where would you like to start? ")
   end = input("Where would you like to stop? ")
   print("Your path is: ")
-  bfs(graphed,start,end)
+  print(bfs(graphed,start,end))
   # graphed.BFS(start,end)
   
   
