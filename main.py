@@ -65,20 +65,24 @@ def bfs(graph, start, end):
   # push the first path into the queue
   queue.append(start)
   while queue:
-      # get the first path from the queue
-      path = queue.pop(0)
-      # get the last node from the path
-      graph[key] 
-      node = path[-1]
-      # path found
-      if node == end:
-          return path
-      # enumerate all adjacent nodes, construct a 
-      # new path and push it into the queue
-      for adjacent in graph.get(node, []):
-          new_path = list(path)
-          new_path.append(adjacent)
-          queue.append(new_path)
+    
+    # get the first path from the queue
+    path = queue.pop(0)
+    # get the last node from the path
+    adj = graph[path]
+    print(adj)
+    node = adj[-1]
+    print(node)
+    # node = path[-1]
+    # path found
+    if node == end:
+        return path
+    # enumerate all adjacent nodes, construct a 
+    # new path and push it into the queue
+    for adjacent in graph.get(node, []):
+        new_path = list(path)
+        new_path.append(adjacent)
+        queue.append(new_path)
 
 def main():
   # print("Hello world!")
