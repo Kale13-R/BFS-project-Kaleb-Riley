@@ -74,7 +74,20 @@ def bfs(graph, start, end):
         # new path and push it into the queue
         for adjacent in graph.get(node, []):
             new_path = list(path)
+            # before appending adjacent to the existing path
+            # make sure adjacent is NOT already in the path
+            # otherwise, the algorithm will create a path that
+            # potentially visits a node more than once
+            # (rl)
             new_path.append(adjacent)
+            # check here whether the new path ends at the destination
+            # instead of doing it above -- checking here means you'll
+            # detect the solution path as soon as you find it --
+            # checking above requires the solution path to cycle
+            # through the queue before you discover it ends at the
+            # desired node. Return the path if it ends at the destination.
+            # Only add it to the queue if it DOESN'T end at the destination
+            # (rl)
             queue.append(new_path)
 
 def main():
